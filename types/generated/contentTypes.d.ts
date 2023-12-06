@@ -683,6 +683,7 @@ export interface ApiAreaArea extends Schema.CollectionType {
     singularName: 'area';
     pluralName: 'areas';
     displayName: 'Area';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -760,6 +761,75 @@ export interface ApiJobJob extends Schema.CollectionType {
   };
 }
 
+export interface ApiMessageMessage extends Schema.CollectionType {
+  collectionName: 'messages';
+  info: {
+    singularName: 'message';
+    pluralName: 'messages';
+    displayName: 'Message';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    email: Attribute.String & Attribute.Required;
+    phone: Attribute.String & Attribute.Required;
+    subject: Attribute.String & Attribute.Required;
+    message: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiResumeResume extends Schema.CollectionType {
+  collectionName: 'resumes';
+  info: {
+    singularName: 'resume';
+    pluralName: 'resumes';
+    displayName: 'Resume';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    email: Attribute.String & Attribute.Required;
+    phone: Attribute.String & Attribute.Required;
+    position: Attribute.String & Attribute.Required;
+    gender: Attribute.String & Attribute.Required;
+    message: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -779,6 +849,8 @@ declare module '@strapi/types' {
       'api::area.area': ApiAreaArea;
       'api::category.category': ApiCategoryCategory;
       'api::job.job': ApiJobJob;
+      'api::message.message': ApiMessageMessage;
+      'api::resume.resume': ApiResumeResume;
     }
   }
 }
