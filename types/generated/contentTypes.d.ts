@@ -813,6 +813,7 @@ export interface ApiResumeResume extends Schema.CollectionType {
     position: Attribute.String & Attribute.Required;
     gender: Attribute.String & Attribute.Required;
     message: Attribute.Text & Attribute.Required;
+    file: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

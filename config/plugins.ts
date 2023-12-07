@@ -4,11 +4,11 @@ export default ({ env }) => ({
       provider: "aws-s3",
       providerOptions: {
         s3Options: {
-          accessKeyId: env("AKIA3FEKTWN6FR7K6TUB"),
-          secretAccessKey: env("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"),
-          region: env("ap-south-1"),
+          accessKeyId: env('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: env("AWS_ACCESS_SECRET"),
+          region: env("AWS_REGION"),
           params: {
-            Bucket: env("future-force"),
+            Bucket: env("AWS_BUCKET"),
           },
         },
       },
