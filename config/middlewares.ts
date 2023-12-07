@@ -4,7 +4,8 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:4200', 'http://localhost:1337'],
+      origin: ['http://localhost:4200', 'http://localhost:1337',
+      'https://13-232-158-223.nip.io','https://dqt20olwvqdpd.cloudfront.net'],
       headers: '*'
     },
   },

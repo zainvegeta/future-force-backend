@@ -731,6 +731,40 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiGrievanceGrievance extends Schema.CollectionType {
+  collectionName: 'grievances';
+  info: {
+    singularName: 'grievance';
+    pluralName: 'grievances';
+    displayName: 'Grievance';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    address: Attribute.Text & Attribute.Required;
+    passportNo: Attribute.String & Attribute.Required;
+    phone: Attribute.String & Attribute.Required;
+    email: Attribute.String & Attribute.Required;
+    grievance: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::grievance.grievance',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::grievance.grievance',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiJobJob extends Schema.CollectionType {
   collectionName: 'jobs';
   info: {
@@ -849,6 +883,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::area.area': ApiAreaArea;
       'api::category.category': ApiCategoryCategory;
+      'api::grievance.grievance': ApiGrievanceGrievance;
       'api::job.job': ApiJobJob;
       'api::message.message': ApiMessageMessage;
       'api::resume.resume': ApiResumeResume;

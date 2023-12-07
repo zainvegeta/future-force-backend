@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "grievances",
+  "info": {
+    "singularName": "grievance",
+    "pluralName": "grievances",
+    "displayName": "Grievance"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "text",
+      "required": true
+    },
+    "passportNo": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "grievance": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
