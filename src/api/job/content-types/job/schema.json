@@ -16,18 +16,34 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "blocks"
-    },
     "categories": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::category.category"
     },
-    "areas": {
+    "countries": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::area.area"
+      "target": "api::country.country"
+    },
+    "employer": {
+      "type": "string",
+      "required": true
+    },
+    "vacancies": {
+      "type": "integer"
+    },
+    "vacancies_filled": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

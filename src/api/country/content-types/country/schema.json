@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "areas",
+  "collectionName": "countries",
   "info": {
-    "singularName": "area",
-    "pluralName": "areas",
-    "displayName": "Area",
-    "description": ""
+    "singularName": "country",
+    "pluralName": "countries",
+    "displayName": "Country"
   },
   "options": {
     "draftAndPublish": true

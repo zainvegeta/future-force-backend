@@ -677,29 +677,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiAreaArea extends Schema.CollectionType {
-  collectionName: 'areas';
-  info: {
-    singularName: 'area';
-    pluralName: 'areas';
-    displayName: 'Area';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::area.area', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::area.area', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
@@ -713,6 +690,10 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
+    featured: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    image: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -724,6 +705,36 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCountryCountry extends Schema.CollectionType {
+  collectionName: 'countries';
+  info: {
+    singularName: 'country';
+    pluralName: 'countries';
+    displayName: 'Country';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::country.country',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::country.country',
       'oneToOne',
       'admin::user'
     > &
@@ -778,13 +789,28 @@ export interface ApiJobJob extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks;
     categories: Attribute.Relation<
       'api::job.job',
       'oneToMany',
       'api::category.category'
     >;
-    areas: Attribute.Relation<'api::job.job', 'oneToMany', 'api::area.area'>;
+    countries: Attribute.Relation<
+      'api::job.job',
+      'oneToMany',
+      'api::country.country'
+    >;
+    employer: Attribute.String & Attribute.Required;
+    vacancies: Attribute.Integer;
+    vacancies_filled: Attribute.Integer;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -881,8 +907,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::area.area': ApiAreaArea;
       'api::category.category': ApiCategoryCategory;
+      'api::country.country': ApiCountryCountry;
       'api::grievance.grievance': ApiGrievanceGrievance;
       'api::job.job': ApiJobJob;
       'api::message.message': ApiMessageMessage;
