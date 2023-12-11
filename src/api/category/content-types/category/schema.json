@@ -27,6 +27,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::job.job",
+      "mappedBy": "categories"
     }
   }
 }

@@ -18,23 +18,29 @@
     },
     "categories": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category"
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "inversedBy": "jobs"
     },
     "countries": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::country.country"
+      "relation": "manyToMany",
+      "target": "api::country.country",
+      "inversedBy": "jobs"
     },
     "employer": {
       "type": "string",
       "required": true
     },
     "vacancies": {
-      "type": "integer"
+      "type": "integer",
+      "required": true,
+      "default": 1
     },
     "vacancies_filled": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0,
+      "required": true
     },
     "description": {
       "type": "customField",
@@ -44,6 +50,20 @@
       },
       "required": true,
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "detail": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "required": false,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

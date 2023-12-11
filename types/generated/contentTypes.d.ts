@@ -694,6 +694,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<false>;
     image: Attribute.Media;
+    jobs: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::job.job'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -724,6 +729,11 @@ export interface ApiCountryCountry extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
+    jobs: Attribute.Relation<
+      'api::country.country',
+      'manyToMany',
+      'api::job.job'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -791,17 +801,19 @@ export interface ApiJobJob extends Schema.CollectionType {
     title: Attribute.String & Attribute.Required;
     categories: Attribute.Relation<
       'api::job.job',
-      'oneToMany',
+      'manyToMany',
       'api::category.category'
     >;
     countries: Attribute.Relation<
       'api::job.job',
-      'oneToMany',
+      'manyToMany',
       'api::country.country'
     >;
     employer: Attribute.String & Attribute.Required;
-    vacancies: Attribute.Integer;
-    vacancies_filled: Attribute.Integer;
+    vacancies: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<1>;
+    vacancies_filled: Attribute.Integer &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -811,6 +823,17 @@ export interface ApiJobJob extends Schema.CollectionType {
           preset: 'rich';
         }
       >;
+    detail: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    featured: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
