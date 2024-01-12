@@ -1,0 +1,5 @@
+/**
+ * recaptcha service
+ */
+
+export default () => ({});
