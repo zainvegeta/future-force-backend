@@ -9,6 +9,7 @@ export default [
         "http://localhost:1337",
         "https://admin.futureforceconsultants.com",
         "https://futureforceconsultants.com",
+        "https://www.futureforceconsultants.com"
       ],
       headers: "*",
     },
